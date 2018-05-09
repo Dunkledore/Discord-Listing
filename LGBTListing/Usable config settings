@@ -1,0 +1,7 @@
+An example config. Details from a throw away account. Copy these into a py file in folder instance
+
+
+
+OAUTH2_CLIENT_SECRET = "DLBMcz2-TiT1jVjCkGnqr8ExsMmwWOi-"
+OAUTH2_CLIENT_ID = "443704407348084740"
+OAUTH2_REDIRECT_URI = "http://127.0.0.1:5000/callback"

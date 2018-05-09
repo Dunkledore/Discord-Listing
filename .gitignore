@@ -56,3 +56,4 @@ staticfiles
 venv/
 
 
+LGBTListing/instance/config.py
