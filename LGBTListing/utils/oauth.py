@@ -51,9 +51,15 @@ class OAuth:
 		token = session.get('oauth2_token')
 		if token:
 			discord = OAuth.make_session(token=token)
-			session['guilds'] = discord.get(OAuth.API_BASE_URL+'/users/@me/guilds').json()
+			user_guilds = session['guilds'] = discord.get(OAuth.API_BASE_URL+'/users/@me/guilds').json()
 			# A list containing guild dicts containing id, name, icon, owner and permissions
-			session['user'] = discord.get(OAuth.API_BASE_URL+'/users/@me').json()
+			user_id = session['user'] = discord.get(OAuth.API_BASE_URL+'/users/@me').json()
 			# A user dict that contains id, username, discriminator and avatar
 			session['user_connections'] = discord.get(OAuth.API_BASE_URL+'/users/@me/connections').json()
 			# A list list contains connection dicts containing id, name, type, revoked and integrations
+			session['owned_guilds'] = []
+			for guild in user_guilds:
+				if guild['owner']:
+					guild['in_db'] = False
+					session['owned_guilds'].append(guild)
+

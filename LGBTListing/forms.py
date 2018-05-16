@@ -1,14 +1,15 @@
 import quart.flask_patch
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
-from wtforms.validators import DataRequired, Email, EqualTo
+from wtforms.validators import DataRequired, Email, EqualTo, URL
 
 
-class LoginForm(FlaskForm):
-	username_email = StringField('Username', validators=[DataRequired()])
-	password = PasswordField('Password', validators=[DataRequired()])
-	checkbox = BooleanField('Remember Me')
-	login_submit = SubmitField('Login')
+class AddGuildForm(FlaskForm):
+	description = StringField('guild_description', validators=[DataRequired()])
+	admin1_id = StringField('admin1_id')
+	admin2_id = StringField('admin2_id')
+	invite_link = StringField('invite_link', validators=[URL(), DataRequired()])
+	add_guild_submit = SubmitField('add_guild')
 
 
 class RegistrationForm(FlaskForm):
