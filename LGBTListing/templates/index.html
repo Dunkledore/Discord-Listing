@@ -1,10 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>LGBT Listing</title>
-</head>
-<body>
-    Index
-</body>
-</html>
+{% extends "layout.html" %}
+{% block content %}
+
+<h1>
+    LGBT Listing
+</h1>
+
+<h2>Guilds</h2>
+
+
+{% for guild in guilds %}
+<p> Guild ID = {{ guild.id }} </p>
+<p>Guild Name = {{ guild.name }} </p>
+<p> Invite = {{ guild.invite_link }}</p>
+{% endfor %}
+
+
+{% endblock %}
