@@ -12,6 +12,14 @@ class AddGuildForm(FlaskForm):
 	add_guild_submit = SubmitField('add_guild')
 
 
+class EditGuildForm(FlaskForm):
+	description = StringField('guild_description', validators=[DataRequired()])
+	admin1_id = StringField('admin1_id')
+	admin2_id = StringField('admin2_id')
+	invite_link = StringField('invite_link', validators=[URL(), DataRequired()])
+	add_guild_submit = SubmitField('add_guild')
+
+
 class RegistrationForm(FlaskForm):
 	username = StringField('Username', validators=[DataRequired()])
 	email = StringField('Email', validators=[DataRequired(), Email()])

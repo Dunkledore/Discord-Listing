@@ -53,6 +53,7 @@
                 <a href="/addguild/{{guild['id']}}">Add to db</a>
             {% else %}
                 <p>{{ guild['name'] }}</p>
+                <a href="/editguild/{{ guild['id'] }}">Edit Guild</a>
             {% endif %}
         </div>
     {% endfor %}

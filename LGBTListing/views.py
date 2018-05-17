@@ -3,7 +3,7 @@ from quart import render_template, request, redirect, session, url_for, flash
 from .utils.oauth import OAuth
 from .models import database, Guild
 from .utils.login import require_login
-from .forms import AddGuildForm
+from .forms import AddGuildForm, EditGuildForm
 
 
 @app.route("/")
@@ -96,6 +96,50 @@ async def addguild(id_):
 	database.session.commit()
 	await flash("Guild added", "info")
 	return redirect("/myguilds")
+
+
+@app.route('/editguild/<id_>', methods=['GET', 'POST'])
+@require_login
+async def editguild(id_):
+	owned_guild = False
+	for guild in session["owned_guilds"]:
+		if guild["id"] == id_:
+			owned_guild = guild
+
+	if not owned_guild:
+		await flash("You are not the owner of this guild", "error")
+		return redirect('/myguilds')
+
+	guild = Guild.query.filter(Guild.id == id_).first()
+	if not guild:
+		return redirect('/addguild/{}'.format(id_))
+
+	edit_guild_form = EditGuildForm()
+	if request.method == "GET":
+		return await render_template('addguild.html', edit_guild_form=edit_guild_form)
+
+	description = edit_guild_form.description.data
+	admin1_id = edit_guild_form.admin1_id.data
+	admin2_id = edit_guild_form.admin2_id.data
+	invite_link = edit_guild_form.invite_link.data
+	name = owned_guild["name"]
+
+	if description:
+		guild.description = description
+	if admin1_id:
+		guild.admin_1_id = admin1_id
+	if admin2_id:
+		guild.admin_2_id = admin2_id
+	if invite_link:
+		guild.invite_link = invite_link
+	guild.name = name
+
+	database.session.commit()
+
+
+	await flash("Guild Updated", "info")
+	return redirect("/myguilds")
+
 
 
 @app.route('/logout')
