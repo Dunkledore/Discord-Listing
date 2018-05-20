@@ -1,18 +1,33 @@
 {% extends "layout.html" %}
 {% block content %}
+<div class="container">
+    <div class="row premium">
+        <div class="row-title">
+            Premium Servers
+        </div>
+        <div class="cards-wrapper row">
+            {% for guild in guilds %}
+            <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="server-card">
+                        <div class="card-head premium">Premium</div>
+                        <div class="card-content">
+                            <div class="img">
+                                <img src="{{guild.icon}}" alt="">
+                            </div>
+                            <div class="desc">
+                                <div class="title">{{guild.name}}</div>
+                                <div class="description">{{guild.description}}</div>
+                            </div>
+                        </div>
+                        <div class="card-foot">
+                            <a href="#">Info</a>
+                            <a href="#">Join Server</a>
+                        </div>
+                    </div>
 
-<h1>
-    LGBT Listing
-</h1>
-
-<h2>Guilds</h2>
-
-
-{% for guild in guilds %}
-<p> Guild ID = {{ guild.id }} </p>
-<p>Guild Name = {{ guild.name }} </p>
-<p> Invite = {{ guild.invite_link }}</p>
-{% endfor %}
-
-
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
 {% endblock %}

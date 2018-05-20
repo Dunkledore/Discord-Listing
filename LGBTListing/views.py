@@ -90,8 +90,9 @@ async def addguild(id_):
 	admin2_id = add_guild_form.admin2_id.data
 	invite_link = add_guild_form.invite_link.data
 	name = owned_guild["name"]
+	icon = f'https://cdn.discordapp.com/icons/{id_}/{owned_guild["icon"]}.png'
 
-	guild = Guild(id=id_, name=name, description=description, admin_1_id=admin1_id or 0, admin_2_id=admin2_id or 0, invite_link=invite_link)
+	guild = Guild(id=id_, name=name, description=description, admin_1_id=admin1_id or 0, admin_2_id=admin2_id or 0, invite_link=invite_link, icon=icon)
 	database.session.add(guild)
 	database.session.commit()
 	await flash("Guild added", "info")
@@ -116,13 +117,14 @@ async def editguild(id_):
 
 	edit_guild_form = EditGuildForm()
 	if request.method == "GET":
-		return await render_template('addguild.html', edit_guild_form=edit_guild_form)
+		return await render_template('editguild.html', edit_guild_form=edit_guild_form)
 
 	description = edit_guild_form.description.data
 	admin1_id = edit_guild_form.admin1_id.data
 	admin2_id = edit_guild_form.admin2_id.data
 	invite_link = edit_guild_form.invite_link.data
 	name = owned_guild["name"]
+	icon = f'https://cdn.discordapp.com/icons/{id_}/{owned_guild["icon"]}.png'
 
 	if description:
 		guild.description = description
@@ -133,6 +135,7 @@ async def editguild(id_):
 	if invite_link:
 		guild.invite_link = invite_link
 	guild.name = name
+	guild.icon = icon
 
 	database.session.commit()
 

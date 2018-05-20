@@ -14,7 +14,7 @@ class Guild(database.Model):
 	admin_2_id = database.Column(database.BigInteger)
 	category = database.Column(database.String(80), default="Misc")
 	invite_link = database.Column(database.String(80))
-	icon = database.Column(database.String(80))
+	icon = database.Column(database.String(150))
 
 
 
