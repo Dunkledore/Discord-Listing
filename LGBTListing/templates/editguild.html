@@ -2,21 +2,21 @@
   {{ edit_guild_form.hidden_tag() }}
     <div>
       <label for="description">Guild Description</label>
-      {{ add_guild_form.description(size=32, class_="") }}
+      {{ edit_guild_form.description(size=32, class_="") }}
     </div>
     <div>
       <label for="admin1_id">Editor 1</label>
-      {{ add_guild_form.admin1_id(size=32, class_="") }}
+      {{ edit_guild_form.admin1_id(size=32, class_="") }}
     </div>
     <div>
       <label for="editor2_id">Editor 2</label>
-      {{ add_guild_form.admin2_id(size=32, class_="") }}
+      {{ edit_guild_form.admin2_id(size=32, class_="") }}
     </div>
     <div>
       <label for="invite_link">Invite Link</label>
-      {{ add_guild_form.invite_link(class_="") }}
+      {{ edit_guild_form.invite_link(class_="") }}
     </div>
     <div class="">
-    {{ add_guild_form.add_guild_submit(class_="") }}
+    {{ edit_guild_form.add_guild_submit(class_="") }}
     </div>
 </form>
